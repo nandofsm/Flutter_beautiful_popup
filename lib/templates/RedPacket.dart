@@ -53,8 +53,7 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
     return options.content is String
         ? AutoSizeText(
             options.content,
-            minFontSize:
-                Theme.of(options.context).textTheme.headline6?.fontSize ?? 12,
+            minFontSize: Theme.of(options.context).textTheme.headline6?.fontSize ?? 12,
             style: TextStyle(
               color: Colors.white.withOpacity(0.95),
             ),
@@ -76,8 +75,7 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
         primaryColor,
       ]);
       final double elevation = (outline || flat) ? 0 : 2;
-      final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+      final labelColor = (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
         gradient: (outline || flat) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
@@ -87,11 +85,15 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.transparent,
+          elevation: elevation,
+          padding: EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
         child: Ink(
           decoration: decoration,
           child: Container(
@@ -108,10 +110,6 @@ class TemplateRedPacket extends BeautifulPopupTemplate {
               ).merge(labelStyle),
             ),
           ),
-        ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
         ),
         onPressed: onPressed,
       );

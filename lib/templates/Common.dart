@@ -51,8 +51,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
 
   /// The path of the illustration asset.
   String get illustrationPath => '';
-  String get illustrationKey =>
-      'packages/flutter_beautiful_popup/$illustrationPath';
+  String get illustrationKey => 'packages/flutter_beautiful_popup/$illustrationPath';
   Color get primaryColor;
 
   double percentW(double n) {
@@ -171,8 +170,7 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         primaryColor,
       ]);
       final double elevation = (outline || flat) ? 0 : 2;
-      final labelColor =
-          (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
+      final labelColor = (outline || flat) ? primaryColor : Colors.white.withOpacity(0.95);
       final decoration = BoxDecoration(
         gradient: (outline || flat) ? null : gradient,
         borderRadius: BorderRadius.all(Radius.circular(80.0)),
@@ -182,11 +180,15 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
         ),
       );
       final minHeight = 40.0 - (outline ? 2 : 0);
-      return RaisedButton(
-        color: Colors.transparent,
-        elevation: elevation,
-        highlightElevation: 0,
-        splashColor: Colors.transparent,
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.transparent,
+          elevation: elevation,
+          padding: EdgeInsets.all(0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
         child: Ink(
           decoration: decoration,
           child: Container(
@@ -202,10 +204,6 @@ abstract class BeautifulPopupTemplate extends StatefulWidget {
               ).merge(labelStyle),
             ),
           ),
-        ),
-        padding: EdgeInsets.all(0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
         ),
         onPressed: onPressed,
       );
@@ -225,13 +223,9 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
     Future.delayed(Duration.zero, () {
       closeEntry = OverlayEntry(
         builder: (ctx) {
-          final bottom = (MediaQuery.of(context).size.height -
-                      widget.height -
-                      widget.bodyMargin * 2) /
-                  4 -
-              20;
+          final bottom = (MediaQuery.of(context).size.height - widget.height - widget.bodyMargin * 2) / 4 - 20;
           return Stack(
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             children: <Widget>[
               Positioned(
                 child: Container(
@@ -264,7 +258,7 @@ class BeautifulPopupTemplateState extends State<BeautifulPopupTemplate> {
             height: widget.height,
             width: widget.width,
             child: Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               children: widget.layout,
             ),
           ),
